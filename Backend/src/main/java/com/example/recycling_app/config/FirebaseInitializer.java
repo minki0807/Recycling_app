@@ -28,16 +28,16 @@ public class FirebaseInitializer {
     @PostConstruct
     public void init() {
         try {
-            FileInputStream serviceAccount =
-                    new FileInputStream("${firebase.sdk.path}");
+//            FileInputStream serviceAccount =
+//                    new FileInputStream("src/main/resources/firebase/firebase-service-account.json");
 
-//            // FileInputStream 대신 클래스패스 리소스를 InputStream으로 직접 읽어옵니다.(aws ec2 전용)
-//            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(firebaseSdkPath);
-//
-//            // 파일을 찾지 못했을 경우를 대비한 예외 처리
-//            if (serviceAccount == null) {
-//                throw new IOException("Firebase 서비스 계정 키 파일을 찾을 수 없습니다: " + firebaseSdkPath);
-//            }
+            // FileInputStream 대신 클래스패스 리소스를 InputStream으로 직접 읽어옵니다.(aws ec2 전용)
+            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(firebaseSdkPath);
+
+            // 파일을 찾지 못했을 경우를 대비한 예외 처리
+            if (serviceAccount == null) {
+                throw new IOException("Firebase 서비스 계정 키 파일을 찾을 수 없습니다: " + firebaseSdkPath);
+            }
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
