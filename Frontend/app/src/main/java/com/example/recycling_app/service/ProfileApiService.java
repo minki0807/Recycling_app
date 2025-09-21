@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-// import retrofit2.http.Header; // Interceptor 사용 시 필요 없음
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -27,24 +27,32 @@ public interface ProfileApiService {
 
     // GET 요청: "profile/{uid}" 경로로 특정 사용자의 프로필 정보 조회
     @GET("profile/{uid}")
-    Call<ProfileDTO> getProfile(@Path("uid") String uid);
+    Call<ProfileDTO> getProfile(
+            @Path("uid") String uid,
+            @Header("Authorization") String authHeader
+    );
 
     // PUT 요청: "profile/{uid}" 경로로 사용자 프로필 전체 저장 또는 업데이트
     @PUT("profile/{uid}")
     Call<String> saveProfile(
             @Path("uid") String uid,
+            @Header("Authorization") String authHeader,
             @Body ProfileDTO profileDTO
     );
 
     // DELETE 요청: "profile/{uid}" 경로로 특정 사용자 계정 삭제
     @DELETE("profile/{uid}")
-    Call<String> deleteUserAccount(@Path("uid") String uid);
+    Call<String> deleteUserAccount(
+            @Path("uid") String uid,
+            @Header("Authorization") String authHeader
+    );
 
     // POST 요청 (Multipart): "profile/{uid}/upload-image" 경로로 프로필 이미지 업로드
     @Multipart
     @POST("profile/{uid}/upload-image")
     Call<String> uploadImage(
             @Path("uid") String uid,
+            @Header("Authorization") String authHeader,
             @Part MultipartBody.Part file
     );
 
@@ -52,6 +60,7 @@ public interface ProfileApiService {
     @PATCH("profile/{uid}")
     Call<String> updateProfileFields(
             @Path("uid") String uid,
+            @Header("Authorization") String authHeader,
             @Body Map<String, Object> updates
     );
 
@@ -59,20 +68,28 @@ public interface ProfileApiService {
     @PATCH("profile/{uid}/password")
     Call<String> changePassword(
             @Path("uid") String uid,
+            @Header("Authorization") String authHeader,
             @Body Map<String, String> passwordUpdate
     );
 
     // GET 요청: "activity/{uid}" 경로로 특정 사용자의 AI 인식 활동 기록 조회
     @GET("activity/{uid}")
-    Call<List<AiRecognitionRecordDTO>> getActivityRecords(@Path("uid") String uid);
+    Call<List<AiRecognitionRecordDTO>> getActivityRecords(
+            @Path("uid") String uid,
+            @Header("Authorization") String authHeader
+    );
     // GET 요청: "language/{uid}" 경로로 특정 사용자의 언어 설정 조회
     @GET("language/{uid}")
-    Call<LanguageDTO> getLanguageSetting(@Path("uid") String uid);
+    Call<LanguageDTO> getLanguageSetting(
+            @Path("uid") String uid,
+            @Header("Authorization") String authHeader
+    );
 
     // POST 요청: "language/{uid}" 경로로 사용자 언어 설정 저장 또는 수정
     @POST("language/{uid}")
     Call<String> updateLanguageSetting(
             @Path("uid") String uid,
+            @Header("Authorization") String authHeader,
             @Body LanguageDTO languageDTO
     );
 
@@ -82,7 +99,10 @@ public interface ProfileApiService {
 
     // GET 요청: "inquiry/{uid}" 경로로 특정 사용자가 작성한 문의 목록 조회
     @GET("inquiry/{uid}")
-    Call<List<InquiryDTO>> getInquiriesByUid(@Path("uid") String uid);
+    Call<List<InquiryDTO>> getInquiriesByUid(
+            @Path("uid") String uid,
+            @Header("Authorization") String authHeader
+    );
 
     // GET 요청: "faq" 경로로 전체 FAQ 목록 조회.
     @GET("faq")

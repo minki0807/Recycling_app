@@ -7,198 +7,186 @@
     android:background="#B5F8DB"
     tools:context=".MainscreenActivity">
 
-    <ScrollView
-        android:id="@+id/main_content_scrollview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#FFFFFF"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/underbar_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="412dp"
+        android:layout_height="888dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/main_header_back"
+            android:layout_width="427dp"
+            android:layout_height="673dp"
+            android:src="@drawable/mainimage_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
 
-            <ImageView
-                android:id="@+id/main_header_back"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/mainimage_back"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="276dp"
-                tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/main_header_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="배경사진"
+            android:src="@drawable/mainimage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-            <ImageView
-                android:id="@+id/main_header_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="배경사진"
-                android:src="@drawable/mainimage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/main_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:contentDescription="환영합니다 텍스트"
-                android:src="@drawable/main_text"
-                app:layout_constraintEnd_toEndOf="@+id/main_header_top"
-                app:layout_constraintHorizontal_bias="0.064"
-                app:layout_constraintStart_toStartOf="@+id/main_header_top"
-                app:layout_constraintTop_toBottomOf="@+id/main_header_top" />
+        <ImageView
+            android:id="@+id/main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:contentDescription="환영합니다 텍스트"
+            android:src="@drawable/main_text"
+            app:layout_constraintEnd_toEndOf="@+id/main_header_top"
+            app:layout_constraintHorizontal_bias="0.064"
+            app:layout_constraintStart_toStartOf="@+id/main_header_top"
+            app:layout_constraintTop_toBottomOf="@+id/main_header_top" />
 
 
-            <ImageButton
-                android:id="@+id/camera_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/camera_box"
-                android:contentDescription="쓰레기 인식 카메라 박스"
-                android:scaleType="fitXY"
-                android:src="@drawable/camera_box_b"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toStartOf="@+id/map_box"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_text" />
+        <ImageButton
+            android:id="@+id/camera_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/camera_box"
+            android:contentDescription="쓰레기 인식 카메라 박스"
+            android:scaleType="fitXY"
+            android:src="@drawable/camera_box_b"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/map_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_text" />
 
 
-            <ImageView
-                android:id="@+id/camera_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="쓰레기 인식 카메라 텍스트"
-                android:scaleType="fitCenter"
-                android:src="@drawable/camera_text"
-                app:layout_constraintBottom_toBottomOf="@+id/camera_box"
-                app:layout_constraintEnd_toEndOf="@+id/camera_box"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/camera_box"
-                app:layout_constraintTop_toTopOf="@+id/camera_box"
-                app:layout_constraintVertical_bias="0.16" />
+        <ImageView
+            android:id="@+id/camera_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="쓰레기 인식 카메라 텍스트"
+            android:scaleType="fitCenter"
+            android:src="@drawable/camera_text"
+            app:layout_constraintBottom_toBottomOf="@+id/camera_box"
+            app:layout_constraintEnd_toEndOf="@+id/camera_box"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/camera_box"
+            app:layout_constraintTop_toTopOf="@+id/camera_box"
+            app:layout_constraintVertical_bias="0.16" />
 
 
-            <ImageButton
-                android:id="@+id/map_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/map_box"
-                android:contentDescription="수거함 지도 박스"
-                android:scaleType="fitXY"
-                android:src="@drawable/map_box_b"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/camera_box"
-                app:layout_constraintTop_toBottomOf="@+id/main_text" />
+        <ImageButton
+            android:id="@+id/map_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/map_box"
+            android:contentDescription="수거함 지도 박스"
+            android:scaleType="fitXY"
+            android:src="@drawable/map_box_b"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/camera_box"
+            app:layout_constraintTop_toBottomOf="@+id/main_text" />
 
 
-            <ImageView
-                android:id="@+id/map_text"
-                android:layout_width="145dp"
-                android:layout_height="57dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="수거함 지도 텍스트"
-                android:scaleType="fitCenter"
-                android:src="@drawable/map_text"
-                app:layout_constraintBottom_toBottomOf="@+id/map_box"
-                app:layout_constraintEnd_toEndOf="@+id/map_box"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/map_box"
-                app:layout_constraintTop_toTopOf="@+id/map_box"
-                app:layout_constraintVertical_bias="0.098" />
+        <ImageView
+            android:id="@+id/map_text"
+            android:layout_width="145dp"
+            android:layout_height="57dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="수거함 지도 텍스트"
+            android:scaleType="fitCenter"
+            android:src="@drawable/map_text"
+            app:layout_constraintBottom_toBottomOf="@+id/map_box"
+            app:layout_constraintEnd_toEndOf="@+id/map_box"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/map_box"
+            app:layout_constraintTop_toTopOf="@+id/map_box"
+            app:layout_constraintVertical_bias="0.098" />
 
 
-            <ImageButton
-                android:id="@+id/howto_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/howto_box"
-                android:contentDescription="지역별 가이드 박스"
-                android:scaleType="fitXY"
-                android:src="@drawable/howto_box_b"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toStartOf="@+id/upcycling_market_box"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/camera_box" />
+        <ImageButton
+            android:id="@+id/howto_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/howto_box"
+            android:contentDescription="지역별 가이드 박스"
+            android:scaleType="fitXY"
+            android:src="@drawable/howto_box_b"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/upcycling_market_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/camera_box" />
 
-            <ImageView
-                android:id="@+id/howto_text"
-                android:layout_width="155dp"
-                android:layout_height="43dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="지역별 가이드 텍스트"
-                android:scaleType="fitCenter"
-                android:src="@drawable/howto_text"
-                app:layout_constraintBottom_toBottomOf="@+id/howto_box"
-                app:layout_constraintEnd_toEndOf="@+id/howto_box"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/howto_box"
-                app:layout_constraintTop_toTopOf="@+id/howto_box"
-                app:layout_constraintVertical_bias="0.164" />
-
-
-            <ImageButton
-                android:id="@+id/upcycling_market_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/upcycle_box"
-                android:contentDescription="업사이클링 마켓 박스"
-                android:scaleType="fitXY"
-                android:src="@drawable/upcycle_box_b"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/howto_box"
-                app:layout_constraintTop_toBottomOf="@+id/map_box" />
+        <ImageView
+            android:id="@+id/howto_text"
+            android:layout_width="155dp"
+            android:layout_height="43dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="지역별 가이드 텍스트"
+            android:scaleType="fitCenter"
+            android:src="@drawable/howto_text"
+            app:layout_constraintBottom_toBottomOf="@+id/howto_box"
+            app:layout_constraintEnd_toEndOf="@+id/howto_box"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/howto_box"
+            app:layout_constraintTop_toTopOf="@+id/howto_box"
+            app:layout_constraintVertical_bias="0.164" />
 
 
-            <ImageView
-                android:id="@+id/community_text"
-                android:layout_width="167dp"
-                android:layout_height="48dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="업사이클링 마켓 텍스트"
-                android:scaleType="fitCenter"
-                android:src="@drawable/upcycle_text"
-                app:layout_constraintBottom_toBottomOf="@+id/upcycling_market_box"
-                app:layout_constraintEnd_toEndOf="@+id/upcycling_market_box"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/upcycling_market_box"
-                app:layout_constraintTop_toTopOf="@+id/upcycling_market_box"
-                app:layout_constraintVertical_bias="0.116" />
+        <ImageButton
+            android:id="@+id/upcycling_market_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/upcycle_box"
+            android:contentDescription="업사이클링 마켓 박스"
+            android:scaleType="fitXY"
+            android:src="@drawable/upcycle_box_b"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/howto_box"
+            app:layout_constraintTop_toBottomOf="@+id/map_box" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/upcycling_market_box" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/community_text"
+            android:layout_width="167dp"
+            android:layout_height="48dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="업사이클링 마켓 텍스트"
+            android:scaleType="fitCenter"
+            android:src="@drawable/upcycle_text"
+            app:layout_constraintBottom_toBottomOf="@+id/upcycling_market_box"
+            app:layout_constraintEnd_toEndOf="@+id/upcycling_market_box"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/upcycling_market_box"
+            app:layout_constraintTop_toTopOf="@+id/upcycling_market_box"
+            app:layout_constraintVertical_bias="0.116" />
 
-    </ScrollView>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upcycling_market_box" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/underbar_container"
@@ -210,8 +198,8 @@
 
         <ImageView
             android:id="@+id/underbar"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_width="416dp"
+            android:layout_height="99dp"
             android:contentDescription="언더바"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"

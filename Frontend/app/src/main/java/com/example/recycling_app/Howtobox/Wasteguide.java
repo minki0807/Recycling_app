@@ -173,7 +173,6 @@ public class Wasteguide extends AppCompatActivity {
                     if (task.isSuccessful() && !task.getResult().isEmpty()) {
                         Log.d(TAG, "2차/3차 조회 성공 (대표 정보)");
                         displayGuideInfo((QueryDocumentSnapshot) task.getResult().getDocuments().get(0));
-                        Toast.makeText(this, "상세 지역 정보가 없어 시/군/구의 대표 정보를 표시합니다.", Toast.LENGTH_LONG).show();
                     } else {
                         Log.e(TAG, "모든 조회 실패. 최종적으로 정보 없음.");
                         guideDetailsTextView.setText("해당 지역의 분리배출 가이드 정보가 없습니다.");

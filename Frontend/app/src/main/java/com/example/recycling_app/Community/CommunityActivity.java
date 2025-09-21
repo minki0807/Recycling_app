@@ -128,10 +128,19 @@ public class CommunityActivity extends AppCompatActivity {
 
             @Override
             public void onEditClick(Post post) {
-                if (currentUid != null && currentUid.equals(post.getUid())) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    String currentUid = user.getUid();
+                    String currentUserNickname = "가져온 닉네임 변수"; // ProfileLoader로 가져온 닉네임 변수를 사용
+
                     Intent intent = new Intent(CommunityActivity.this, MakePostActivity.class);
                     intent.putExtra("postId", post.getPostId());
+                    intent.putExtra("USER_ID", currentUid);
+                    intent.putExtra("USER_NICKNAME", currentUserNickname);
                     startActivity(intent);
+                } else {
+                    // 로그인이 안 되어 있을 경우 처리
+                    Toast.makeText(CommunityActivity.this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -168,12 +177,18 @@ public class CommunityActivity extends AppCompatActivity {
         });
 
         fab_write.setOnClickListener(v -> {
-            if (mAuth.getCurrentUser() != null) {
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user != null) {
+                String currentUid = user.getUid();
+                String currentUserNickname = "가져온 닉네임 변수"; // ProfileLoader로 가져온 닉네임 변수를 사용
+
                 Intent intent = new Intent(CommunityActivity.this, MakePostActivity.class);
+
                 intent.putExtra("USER_ID", currentUid);
                 intent.putExtra("USER_NICKNAME", currentUserNickname);
                 startActivity(intent);
             } else {
+                // 로그인이 안 되어 있을 경우 처리
                 Toast.makeText(CommunityActivity.this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -310,22 +325,22 @@ public class CommunityActivity extends AppCompatActivity {
             postsListener.remove();
         }
 
-        Query query;
-        if ("전체".equals(category)) {
-            query = db.collection("posts")
-                    .whereEqualTo("deleted", false)
-                    .orderBy("createdAt", Query.Direction.DESCENDING);
-        } else {
-            query = db.collection("posts")
-                    .whereEqualTo("category", category)
-                    .whereEqualTo("deleted", false)
-                    .orderBy("createdAt", Query.Direction.DESCENDING);
+        Query query = db.collection("posts")
+                .whereEqualTo("deleted", false);
+
+        if (!"전체".equals(category)) {
+            query = query.whereEqualTo("category", category);
         }
 
-        postsListener = (query).addSnapshotListener((queryDocumentSnapshots, e) -> {
+        // 최종 쿼리에 정렬 조건 추가
+        query = query.orderBy("createdAt", Query.Direction.DESCENDING);
+
+        postsListener = query.addSnapshotListener((queryDocumentSnapshots, e) -> {
             if (e != null) {
                 Log.e(TAG, "게시글 실시간 업데이트 오류", e);
-                Toast.makeText(CommunityActivity.this, "게시글을 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                if (queryDocumentSnapshots == null) {
+                    Toast.makeText(CommunityActivity.this, "게시글을 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT);
+                }
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }

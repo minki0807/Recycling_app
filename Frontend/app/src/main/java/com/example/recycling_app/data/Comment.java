@@ -36,6 +36,7 @@ public class Comment {
     @SerializedName("deletedAt")
     private Date deletedAt;
     private List<Comment> replies;
+    private int depth;
 
     // Getter와 Setter
     public String getCommentId() { return commentId; }
@@ -67,4 +68,6 @@ public class Comment {
     public void setDeletedAt(Date deletedAt) { this.deletedAt = deletedAt; }
     public List<Comment> getReplies() { return replies; }
     public void setReplies(List<Comment> replies) { this.replies = replies; }
+    public int getDepth() { return depth; }
+    public void setDepth(int depth) { this.depth = depth; }
 }

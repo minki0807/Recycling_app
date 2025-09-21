@@ -39,6 +39,8 @@ import retrofit2.Response;
 // 회원 탈퇴 기능을 담당하는 액티비티
 public class AccountDeletionActivity extends AppCompatActivity {
 
+    private static final String TAG = "AccountDeletionActivity";
+
     private ImageView backArrowIcon;
     private TextView accountDeletionTitle;
     private EditText etCurrentPassword;
@@ -155,7 +157,7 @@ public class AccountDeletionActivity extends AppCompatActivity {
         String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
 
         // deleteUserAccount API 호출 시 Authorization 헤더 전달
-        apiService.deleteUserAccount(currentUid).enqueue(new Callback<String>() {
+        apiService.deleteUserAccount(currentUid, authHeader).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {

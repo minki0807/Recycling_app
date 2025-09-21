@@ -60,102 +60,111 @@ public class PostAdapter extends ListAdapter<Post, PostAdapter.PostViewHolder> {
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder {
-        private final TextView postTitle, postNickname, postBody, postLikesCount, postCommentsCount;
-        private final ImageView postProfileImage, postContentImage;
-        private final ImageButton postMoreVert;
-        private final ImageView postLikeIcon, postCommentIcon;
-
+        private ImageView imageProfile, imagePostContent;
+        private TextView textNickname, textCreatedAt, textTitle, textPostBody, textLikeCount, textCommentCount;
+        private ImageButton btnMoreOptions, btnLike, btnComment;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             // UI 요소 초기화
-            postTitle = itemView.findViewById(R.id.text_post_title);
-            postNickname = itemView.findViewById(R.id.text_author_nickname);
-            postBody = itemView.findViewById(R.id.text_post_body);
-            postLikesCount = itemView.findViewById(R.id.text_like_count);
-            postCommentsCount = itemView.findViewById(R.id.text_comment_count);
-            postProfileImage = itemView.findViewById(R.id.text_profile_initial);
-            postContentImage = itemView.findViewById(R.id.image_post_content);
-            postMoreVert = itemView.findViewById(R.id.button_more_options);
-            postLikeIcon = itemView.findViewById(R.id.icon_like);
-            postCommentIcon = itemView.findViewById(R.id.icon_chat);
+            imageProfile = itemView.findViewById(R.id.text_profile_initial);
+            textNickname = itemView.findViewById(R.id.text_author_nickname);
+            textCreatedAt = itemView.findViewById(R.id.text_post_date);
+            textTitle = itemView.findViewById(R.id.text_post_title);
+            textPostBody = itemView.findViewById(R.id.text_post_body);
+            textLikeCount = itemView.findViewById(R.id.text_like_count);
+            imagePostContent = itemView.findViewById(R.id.image_post_content);
+            textCommentCount = itemView.findViewById(R.id.text_comment_count);
+            btnMoreOptions = itemView.findViewById(R.id.button_more_options);
+            btnLike = itemView.findViewById(R.id.button_like);
+            btnComment = itemView.findViewById(R.id.button_comment);
 
             // 프로필 클릭 리스너
-            postProfileImage.setOnClickListener(v -> {
+            imageProfile.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && listener != null) {
                     listener.onProfileClick(getItem(position));
                 }
             });
 
+            // 게시글 클릭 리스너
             itemView.setOnClickListener(v -> {
-                if (listener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(getItem(position));
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && listener != null) {
+                    Post post = getItem(position);
+                    // postId가 null이 아닌 경우에만 클릭 이벤트 처리
+                    if (post != null && post.getPostId() != null) {
+                        listener.onItemClick(post);
+                    } else {
+                        Toast.makeText(itemView.getContext(), "게시글 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
-            postMoreVert.setOnClickListener(showPopupMenu);
-            postProfileImage.setOnClickListener(v -> {
-                if (listener != null) {
+            // 더보기 버튼 클릭 리스너 (내 게시글만 보이도록)
+            if (btnMoreOptions != null) {
+                btnMoreOptions.setOnClickListener(v -> {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        listener.onProfileClick(getItem(position));
+                        PostAdapter.this.showPopupMenu(v, getItem(position));
                     }
-                }
-            });
+                });
+            }
         }
 
         public void bind(Post post) {
-            postTitle.setText(post.getTitle());
-            postNickname.setText(post.getNickname());
-            postLikesCount.setText(String.valueOf(post.getLikesCount()));
-            postCommentsCount.setText(String.valueOf(post.getCommentsCount()));
+            ProfileLoader.loadProfileByUid(itemView.getContext(), textNickname, imageProfile, post.getUid());
 
-            // 프로필 정보 로딩
-            ProfileLoader.loadProfileByUid(itemView.getContext(), null, postProfileImage, post.getUid());
+            textCreatedAt.setText(formatDate(post.getCreatedAt()));
+            textTitle.setText(post.getTitle());
+            textLikeCount.setText(String.valueOf(post.getLikesCount()));
+            textCommentCount.setText(String.valueOf(post.getCommentsCount()));
 
-            // --- 게시글 본문 및 이미지 표시 로직 수정 ---
-            boolean textFound = false;
-            boolean imageFound = false;
+            String fullText = "";
+            String firstImageUrl = null;
 
-            if (post.getContents() != null) {
-                for (ContentBlock contentBlock : post.getContents()) {
-                    if ("text".equals(contentBlock.getType()) && !textFound) {
-                        postBody.setText(contentBlock.getText());
-                        postBody.setVisibility(View.VISIBLE);
-                        textFound = true;
+            if (post.getContents() != null && !post.getContents().isEmpty()) {
+                for (ContentBlock content : post.getContents()) {
+                    if ("text".equals(content.getType())) {
+                        fullText += content.getText();
                     }
-                    if ("image".equals(contentBlock.getType()) && !imageFound) {
-                        String imageUrl = contentBlock.getMediaUrl();
-                        if (imageUrl != null && !imageUrl.isEmpty()) {
-                            Glide.with(itemView.getContext()).load(imageUrl).into(postContentImage);
-                            postContentImage.setVisibility(View.VISIBLE);
-                            imageFound = true;
-                        }
-                    }
-                    // 첫 번째 텍스트와 첫 번째 이미지를 찾았으면 루프 종료
-                    if (textFound && imageFound) {
-                        break;
+                    if ("image".equals(content.getType()) && firstImageUrl == null) {
+                        firstImageUrl = content.getMediaUrl();
                     }
                 }
             }
 
-            // 텍스트나 이미지가 없는 경우 View를 숨김
-            if (!textFound) {
-                postBody.setVisibility(View.GONE);
+            if (fullText.length() > 30) {
+                textPostBody.setText(fullText.substring(0, 30) + "...");
+            } else {
+                textPostBody.setText(fullText);
             }
-            if (!imageFound) {
-                postContentImage.setVisibility(View.GONE);
+            if (firstImageUrl != null) {
+                imagePostContent.setVisibility(View.VISIBLE);
+                Glide.with(itemView.getContext())
+                        .load(firstImageUrl)
+                        .into(imagePostContent);
+            } else {
+                imagePostContent.setVisibility(View.GONE);
             }
 
-            // 수정 및 삭제 메뉴 버튼 표시 여부
-            if (post.getUid() != null && post.getUid().equals(currentUid)) {
-                postMoreVert.setVisibility(View.VISIBLE);
-            } else {
-                postMoreVert.setVisibility(View.GONE);
+            // 좋아요 버튼 상태 업데이트 (Null-check 추가)
+            if (btnLike != null) {
+                if (post.isLikedByCurrentUser()) {
+                    btnLike.setImageResource(R.drawable.icon_like_red);
+                } else {
+                    btnLike.setImageResource(R.drawable.icon_like);
+                }
+            }
+
+
+            // 더보기 버튼 가시성 (내 게시글일 경우에만 표시)
+            if (btnMoreOptions != null) {
+                if (currentUid != null && currentUid.equals(post.getUid())) {
+                    btnMoreOptions.setVisibility(View.VISIBLE);
+                } else {
+                    btnMoreOptions.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }
@@ -189,12 +198,7 @@ public class PostAdapter extends ListAdapter<Post, PostAdapter.PostViewHolder> {
         @SuppressLint("DiffUtilEquals")
         @Override
         public boolean areContentsTheSame(@NonNull Post oldItem, @NonNull Post newItem) {
-            // isLikedByCurrentUser 필드는 UI 상태이므로 비교에서 제외
-            return oldItem.getNickname().equals(newItem.getNickname()) &&
-                    oldItem.getTitle().equals(newItem.getTitle()) &&
-                    oldItem.getLikesCount() == newItem.getLikesCount() &&
-                    oldItem.getCommentsCount() == newItem.getCommentsCount() &&
-                    oldItem.getContents().equals(newItem.getContents());
+            return oldItem.equals(newItem);
         }
     };
 

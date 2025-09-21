@@ -1,9 +1,5 @@
 package com.example.recycling_app.service;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
-
 import com.example.recycling_app.BuildConfig;
 import com.example.recycling_app.data.Comment;
 import com.example.recycling_app.data.Post;
@@ -45,33 +41,35 @@ public class CommunityApiService {
     private String getAuthorizationHeader() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            try {
-                // await()는 Main Thread에서 호출하면 안 되지만, 이 경우에만 예외적으로 처리
-                // 실제 앱에서는 AsyncTask나 코루틴 등을 사용하여 비동기 처리 필요
-                String idToken = user.getIdToken(true).getResult().getToken();
-                return "Bearer " + idToken;
-            } catch (ExecutionException | InterruptedException e) {
-                Log.e(TAG, "Firebase ID Token 획득 실패", e);
-                return null;
-            }
+            // 비동기 호출을 동기적으로 변환
+            String idToken = user.getIdToken(false).getResult().getToken();
+            return "Bearer " + idToken;
         }
         return null;
     }
 
-    // 게시글 목록 조회
+    // getAllPosts, getPosts, getPostDetail 메서드에도 authHeader를 전달하도록 수정
     public void getPosts(String category, Callback<List<Post>> callback) {
-        apiService.getPosts(category, getAuthorizationHeader()).enqueue(callback);
-    }
-
-    // 게시글 상세 조회
-    public void getPostById(String postId, Callback<Post> callback) {
-        apiService.getPostById(postId, getAuthorizationHeader()).enqueue(callback);
+        String authHeader = getAuthorizationHeader();
+        apiService.getPosts(category, authHeader).enqueue(callback);
     }
 
     public void writePost(Post post, Callback<Map<String, String>> callback) {
         String authHeader = getAuthorizationHeader();
         if (authHeader != null) {
             apiService.createPost(authHeader, post).enqueue(callback);
+        }
+    }
+
+    public void getPostById(String postId, Callback<Post> callback) {
+        String authHeader = getAuthorizationHeader();
+        apiService.getPostDetail(postId, authHeader).enqueue(callback);
+    }
+
+    public void createComment(Comment comment, Callback<Map<String, String>> callback) {
+        String authHeader = getAuthorizationHeader();
+        if (authHeader != null) {
+            apiService.createComment(authHeader, comment).enqueue(callback);
         }
     }
 
@@ -120,63 +118,37 @@ public class CommunityApiService {
         }
     }
 
-    // 내가 작성한 게시글 조회
-    public void getMyPosts(Callback<List<Post>> callback) {
+    // getProfile 메서드에 authHeader 파라미터 추가
+    public void getProfile(String uid, Callback<ProfileDTO> callback) {
+        String authHeader = getAuthorizationHeader();
+        apiService.getProfile(uid, authHeader).enqueue(callback);
+    }
+
+    // MypageActivity에서 사용되는 메서드들 추가
+    public void getMyPosts(String uid, Callback<List<Post>> callback) {
         String authHeader = getAuthorizationHeader();
         if (authHeader != null) {
             apiService.getMyPosts(authHeader).enqueue(callback);
-        } else {
-            Log.e(TAG, "Authorization 헤더가 없어 API 호출 불가");
-            // callback.onFailure()를 호출하여 호출자에게 실패를 알림
-            callback.onFailure(null, new IllegalStateException("Authentication token is missing."));
         }
     }
 
-    // 내가 댓글 단 게시글 조회
-    public void getPostsCommentedByMe(Callback<List<Post>> callback) {
+    public void getPostsCommentedByMe(String uid, Callback<List<Post>> callback) {
         String authHeader = getAuthorizationHeader();
         if (authHeader != null) {
             apiService.getPostsCommentedByMe(authHeader).enqueue(callback);
-        } else {
-            Log.e(TAG, "Authorization 헤더가 없어 API 호출 불가");
-            callback.onFailure(null, new IllegalStateException("Authentication token is missing."));
         }
     }
 
-    // 내가 좋아요한 게시글 조회
-    public void getMyLikedPosts(Callback<List<Post>> callback) {
+    public void getMyLikedPosts(String uid, Callback<List<Post>> callback) {
         String authHeader = getAuthorizationHeader();
         if (authHeader != null) {
             apiService.getMyLikedPosts(authHeader).enqueue(callback);
-        } else {
-            Log.e(TAG, "Authorization 헤더가 없어 API 호출 불가");
-            callback.onFailure(null, new IllegalStateException("Authentication token is missing."));
         }
     }
 
-    // 상대방 프로필 조회
-    public void getProfile(String uid, Callback<ProfileDTO> callback) {
-        // 상대방 프로필 조회는 로그인 여부와 관계없으므로 인증 헤더를 보내지 않음 (백엔드 로직에 맞춤)
-        apiService.getProfile(uid, getAuthorizationHeader()).enqueue(callback);
-    }
-
-    // 상대방 게시글 조회
+    // authorUid 인자를 직접 사용하여 getUserPosts를 호출합니다.
     public void getUserPosts(String uid, Callback<List<Post>> callback) {
+        // 서버 API에 권한 검증이 필요 없다고 되어 있으므로 authHeader는 불필요
         apiService.getUserPosts(uid).enqueue(callback);
-    }
-
-    public void createComment(String postId, String content, String uid, Callback<Comment> callback) {
-        String authHeader = getAuthorizationHeader();
-        if (authHeader != null) {
-            apiService.createComment(postId, content, authHeader).enqueue(callback);
-        }
-    }
-
-    public void updateComment(String commentId, String content, String uid, Callback<Void> callback) {
-        String authHeader = getAuthorizationHeader();
-        if (authHeader != null) {
-            Map<String, String> body = Map.of("content", content);
-            apiService.updateComment(commentId, authHeader, body).enqueue(callback);
-        }
     }
 }

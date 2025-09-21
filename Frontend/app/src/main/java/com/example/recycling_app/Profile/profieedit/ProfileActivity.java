@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView; // ImageView 임포트: 이미지 뷰
 import android.widget.TextView; // TextView 임포트: 텍스트 뷰
 import android.widget.Toast; // Toast 임포트: 짧은 메시지 팝업
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge; // EdgeToEdge 임포트: 화면 전체를 사용하는 기능 활성화
 import androidx.core.graphics.Insets; // Insets 임포트: 시스템 바 인셋(inset) 정보
@@ -17,6 +18,8 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat; // WindowInsetsCompat 임포트: 윈도우 인셋(inset) 호환성 유틸리티
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recycling_app.Camera_recognition.CameraActivity;
 import com.example.recycling_app.Camera_recognition.Photo_Recognition;
 import com.example.recycling_app.Community.CommunityActivity;
@@ -30,9 +33,15 @@ import com.example.recycling_app.Profile.accountmanagement.AccountManagementActi
 import com.example.recycling_app.Profile.customerservice.CustomerSupportActivity;
 import com.example.recycling_app.R;
 import com.example.recycling_app.StartscreenActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 //사용자의 프로필 정보를 표시하고, 다양한 마이페이지 메뉴로 이동할 수 있는 Activity.
 public class ProfileActivity extends AppCompatActivity {
+
+    private static final String TAG = "ProfileActivity";
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     // UI 요소들을 위한 변수 선언
     private ImageView backArrowIcon; // 뒤로가기 화살표 아이콘
@@ -47,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
     private View itemSettings;          // '설정' 메뉴
     private View itemCustomerSupport;   // '고객 지원' 메뉴
     private View itemLogout;            // '로그아웃' 메뉴
+    private static final int REQUEST_PROFILE_EDIT = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,9 @@ public class ProfileActivity extends AppCompatActivity {
         mypageTitle = findViewById(R.id.mypage_title);
         profileImage = findViewById(R.id.profile_image); // CircleImageView 위젯과 연결
         profileName = findViewById(R.id.profile_name);
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // 각 메뉴 항목 View들을 XML ID로 찾아서 연결
         itemProfileEdit = findViewById(R.id.item_profile_edit);
@@ -79,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         itemProfileEdit.setOnClickListener(v -> {
             // ProfileEditActivity로 이동하는 Intent 생성 및 시작
             Intent intent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_PROFILE_EDIT);
         });
 
         // '계정 관리' 메뉴 클릭 리스너
@@ -133,6 +146,59 @@ public class ProfileActivity extends AppCompatActivity {
         if (windowInsetsController != null) {
             windowInsetsController.setAppearanceLightStatusBars(true);
         }
+
+        loadUserProfile(); // firebase에서 프로필 불러오기
+        setupBottomNavigation();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume(); // 프로필 수정 후 돌아왔을때 최신화
+        loadUserProfile();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_PROFILE_EDIT && resultCode == RESULT_OK){
+            boolean changed = data != null && data.getBooleanExtra("profileChanged", false);
+            if(changed){
+                loadUserProfile(); // 프로필 변경 즉시 갱신
+            }
+        }
+    }
+
+    private void loadUserProfile(){
+        if (auth.getCurrentUser() == null){
+            Log.w(TAG, "로그인된 사용자가 없음");
+            return;
+        }
+
+        String uid = auth.getCurrentUser().getUid();
+        db.collection("users").document(uid).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if(documentSnapshot.exists()){
+                        String imageUrl = documentSnapshot.getString("profileImageUrl");
+                        String name = documentSnapshot.getString("displayName");
+
+                        Log.d(TAG, "불러온 프로필 URl: " + imageUrl);
+
+                        if(imageUrl != null && !imageUrl.isEmpty()) {
+                            Glide.with(this)
+                                    .load(imageUrl + "?t=" + System.currentTimeMillis())
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE) // 캐시 방지
+                                    .skipMemoryCache(true) // 메모리 캐시 방지
+                                    .into(profileImage);
+                        } else {
+                            profileImage.setImageResource(R.drawable.basic_profile_logo);
+                        }
+
+                        if(name != null && !name.isEmpty()){
+                            profileName.setText(name);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Log.e(TAG, "프로필 불러오기 실패", e));
     }
 
     // 하단 내비게이션 아이콘들의 클릭 이벤트를 설정하는 메서드

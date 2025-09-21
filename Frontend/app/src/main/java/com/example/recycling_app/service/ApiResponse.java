@@ -1,4 +1,4 @@
-package com.example.recycling_app.dto.market;
+package com.example.recycling_app.service;
 
 import java.util.List;
 
@@ -32,6 +32,6 @@ public class ApiResponse<T> {
 
     // 성공 여부 확인 메서드
     public boolean isSuccess() {
-        return "success".equals(status);
+        return "success".equalsIgnoreCase(status);
     }
 }

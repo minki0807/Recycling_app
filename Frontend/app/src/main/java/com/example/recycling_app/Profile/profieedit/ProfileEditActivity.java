@@ -22,6 +22,7 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recycling_app.Camera_recognition.CameraActivity;
 import com.example.recycling_app.Community.CommunityActivity;
 import com.example.recycling_app.Location.LocationActivity;
@@ -52,6 +53,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileEditActivity extends AppCompatActivity {
+
+    private static final String TAG = "ProfileEditActivity";
 
     private ImageView backArrowIcon;
     private TextView editProfileTitle;
@@ -130,20 +133,35 @@ public class ProfileEditActivity extends AppCompatActivity {
         cameraIcon.setOnClickListener(v -> openGallery());
         editProfileImage.setOnClickListener(v -> openGallery());
 
+        // 기본이미지로 변경
         btnChangeToDefaultProfile.setOnClickListener(v -> {
-            editProfileImage.setImageResource(R.drawable.basic_profile_logo);
-            Toast.makeText(ProfileEditActivity.this, "기본 프로필로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            String defaultImageUrl = "https://firebasestorage.googleapis.com/v0/b/your-name-382bf.firebasestorage.app/o/basic_profile_logo.jpg?alt=media&token=795534ec-30e6-4590-b4db-0d050d304e39"; // firebase에 저장될 기본이미지 url
+
+            Glide.with(ProfileEditActivity.this)
+                    .load(defaultImageUrl + "?t=" + System.currentTimeMillis())
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.basic_profile_logo)
+                    .error(R.drawable.basic_profile_logo)
+                    .into(editProfileImage);
+
             Map<String, Object> updates = new HashMap<>();
-            updates.put("profileImageUrl", "");
+            updates.put("profileImageUrl", defaultImageUrl);
             updateProfileFields(updates);
+
+            Toast.makeText(ProfileEditActivity.this, "기본 이미지로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+
+            // 프로필 변경 알림
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("profileChanged", true);
+            setResult(RESULT_OK, resultIntent);
         });
 
         switchPublicProfile.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                Toast.makeText(ProfileEditActivity.this, "프로필이 공개됩니다.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(ProfileEditActivity.this, "프로필이 비공개됩니다.", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(ProfileEditActivity.this,
+                    isChecked ? "프로필이 공개됩니다." : "프로필이 비공개됩니다.",
+                    Toast.LENGTH_SHORT).show();
+
             Map<String, Object> updates = new HashMap<>();
             updates.put("isProfilePublic", isChecked);
             updateProfileFields(updates);
@@ -179,10 +197,10 @@ public class ProfileEditActivity extends AppCompatActivity {
             return;
         }
         ProfileApiService apiService = RetrofitClient.getProfileApiService();
-//        String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
+        String authHeader = "Bearer " + firebaseIdToken;
 
         // getProfile 호출 시 authHeader 추가
-        apiService.getProfile(currentUid).enqueue(new Callback<ProfileDTO>() {
+        apiService.getProfile(currentUid, authHeader).enqueue(new Callback<ProfileDTO>() {
             @Override
             public void onResponse(Call<ProfileDTO> call, Response<ProfileDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -191,11 +209,12 @@ public class ProfileEditActivity extends AppCompatActivity {
 
                     if (currentProfileData.getProfileImageUrl() != null && !currentProfileData.getProfileImageUrl().isEmpty()) {
                         Glide.with(ProfileEditActivity.this)
-                                .load(currentProfileData.getProfileImageUrl())
+                                .load(currentProfileData.getProfileImageUrl() + "?t=" + System.currentTimeMillis())
                                 .placeholder(R.drawable.basic_profile_logo)
                                 .error(R.drawable.basic_profile_logo)
                                 .into(editProfileImage);
                     }
+
                     switchPublicProfile.setChecked(currentProfileData.isProfilePublic());
                     Toast.makeText(ProfileEditActivity.this, "프로필 정보 로드 성공", Toast.LENGTH_SHORT).show();
                 } else {
@@ -228,13 +247,17 @@ public class ProfileEditActivity extends AppCompatActivity {
             return;
         }
         ProfileApiService apiService = RetrofitClient.getProfileApiService();
-//        String authHeader = "Bearer " + firebaseIdToken;
+        String authHeader = "Bearer " + firebaseIdToken;
 
-        apiService.updateProfileFields(currentUid, updates).enqueue(new Callback<String>() {
+        apiService.updateProfileFields(currentUid, authHeader, updates).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ProfileEditActivity.this, "프로필이 성공적으로 업데이트되었습니다.", Toast.LENGTH_SHORT).show();
+                    // 프로필 변경 알림
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("ProfileChanged", true);
+                    setResult(RESULT_OK, resultIntent);
                 } else {
                     Toast.makeText(ProfileEditActivity.this, "프로필 업데이트 실패: " + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -264,17 +287,34 @@ public class ProfileEditActivity extends AppCompatActivity {
             MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
             ProfileApiService apiService = RetrofitClient.getProfileApiService();
+            String authHeader = "Bearer " + firebaseIdToken;
 
             // uploadImage 호출 시 authHeader 추가
-            apiService.uploadImage(currentUid, body).enqueue(new Callback<String>() { // Changed here
+            apiService.uploadImage(currentUid, authHeader, body).enqueue(new Callback<String>() { // Changed here
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         String imageUrl = response.body();
-                        Toast.makeText(ProfileEditActivity.this, "프로필 이미지 업로드 성공: " + imageUrl, Toast.LENGTH_SHORT).show();
+
+                        Glide.with(ProfileEditActivity.this)
+                                .load(imageUrl + "?t=" + System.currentTimeMillis())
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .placeholder(R.drawable.basic_profile_logo)
+                                .error(R.drawable.basic_profile_logo)
+                                .into(editProfileImage);
+
                         Map<String, Object> updates = new HashMap<>();
                         updates.put("profileImageUrl", imageUrl);
                         updateProfileFields(updates);
+
+                        Toast.makeText(ProfileEditActivity.this, "프로필 이미지 업로드 성공: ", Toast.LENGTH_SHORT).show();
+
+                        // 프로필 변경 알림
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("ProfileChanged", true);
+                        setResult(RESULT_OK, resultIntent);
+
                     } else {
                         Toast.makeText(ProfileEditActivity.this, "이미지 업로드 실패: " + response.message(), Toast.LENGTH_LONG).show();
                     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -69,7 +70,7 @@ public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentV
         private final TextView textNickname, textCommentBody;
         private final ImageButton buttonMoreOptions;
         private final TextView buttonReply;
-        private final View replyIndent;
+        private final LinearLayout replyIndent;
         private final View profileIndent;
 
         public CommentViewHolder(@NonNull View itemView) {
@@ -113,24 +114,30 @@ public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentV
         }
 
         public void bind(Comment comment) {
+            // 프로필 정보 로드
             ProfileLoader.loadProfileByUid(itemView.getContext(), textNickname, imageProfile, comment.getUid());
 
+            // 댓글 내용 설정
             if (textCommentBody != null) {
                 textCommentBody.setText(comment.getContent());
             }
 
             // 대댓글 여부에 따라 들여쓰기 적용
             if (comment.getParentId() != null && !comment.getParentId().isEmpty()) {
-                if (profileIndent != null) {
-                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) profileIndent.getLayoutParams();
-                    layoutParams.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, itemView.getResources().getDisplayMetrics());
-                    profileIndent.setLayoutParams(layoutParams);
+                if (replyIndent != null) {
+                    ViewGroup.LayoutParams params = replyIndent.getLayoutParams();
+                    // depth에 따라 들여쓰기 너비를 계산 (예: depth * 32dp)
+                    int indentation = comment.getDepth() * (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, itemView.getResources().getDisplayMetrics());
+                    params.width = indentation;
+                    replyIndent.setLayoutParams(params);
                 }
             } else {
-                if (profileIndent != null) {
-                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) profileIndent.getLayoutParams();
-                    layoutParams.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, itemView.getResources().getDisplayMetrics());
-                    profileIndent.setLayoutParams(layoutParams);
+                if (replyIndent != null) {
+                    ViewGroup.LayoutParams params = replyIndent.getLayoutParams();
+                    // depth에 따라 들여쓰기 너비를 계산 (예: depth * 32dp)
+                    int indentation = comment.getDepth() * (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, itemView.getResources().getDisplayMetrics());
+                    params.width = indentation;
+                    replyIndent.setLayoutParams(params);
                 }
             }
 

@@ -151,6 +151,15 @@ public interface ApiService {
     Call<List<Post>> getPostsCommentedByMe(@Header("Authorization") String authorizationHeader);
 
     /**
+     * 특정 게시글 상세 조회
+     * @param postId 조회할 게시글 ID
+     * @param authorizationHeader Firebase ID 토큰 (Bearer 타입, 로그인 사용자용)
+     * @return 게시글 상세 정보
+     */
+    @GET("/posts/{postId}")
+    Call<Post> getPostById(@Path("postId") String postId, @Header("Authorization") String authorizationHeader);
+
+    /**
      * 내가 좋아요한 게시글 조회
      * @param authorizationHeader Firebase ID 토큰 (Bearer 타입)
      * @return 내가 좋아요한 게시글 목록
@@ -162,5 +171,6 @@ public interface ApiService {
     @GET("/profile/{uid}")
     Call<ProfileDTO> getProfile(@Path("uid") String uid, @Header("Authorization") String authorizationHeader);
 
-    // 나머지 ProfileApiService 메서드들도 필요에 따라 여기에 추가
+    @GET("/community/users/{uid}/posts")
+    Call<List<Post>> getUserPosts(@Path("uid") String uid);
 }

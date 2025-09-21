@@ -2,6 +2,7 @@ package com.example.recycling_app.Profile.detailsofuse;
 
 import androidx.appcompat.app.AppCompatActivity; // 안드로이드의 기본 액티비티 클래스
 
+import android.annotation.SuppressLint;
 import android.os.Bundle; // 액티비티 상태 저장/복원 시 사용
 import android.view.LayoutInflater; // XML 레이아웃을 View 객체로 변환
 import android.view.View; // UI 컴포넌트의 기본 클래스
@@ -52,6 +53,7 @@ public class AiRecognitionHistoryActivity extends AppCompatActivity {
     private String currentUid = "test_user_uid"; // 테스트용 UID. 실제 UID로 교체 필수
     private String firebaseIdToken = "dummy_firebase_id_token"; // 테스트용 ID 토큰. 실제 ID 토큰으로 교체 필수
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +108,7 @@ public class AiRecognitionHistoryActivity extends AppCompatActivity {
 
         // API 서비스의 `getActivityRecords` 메서드 호출하여 네트워크 요청 전송
         // `enqueue` 메서드는 비동기적으로 요청을 실행하고, 응답이 오면 `Callback` 인터페이스의 메서드를 호출
-        apiService.getActivityRecords(currentUid).enqueue(new Callback<List<AiRecognitionRecordDTO>>() {
+        apiService.getActivityRecords(currentUid, authHeader).enqueue(new Callback<List<AiRecognitionRecordDTO>>() {
             @Override
             public void onResponse(Call<List<AiRecognitionRecordDTO>> call, Response<List<AiRecognitionRecordDTO>> response) {
                 // HTTP 응답이 성공적일 때 (2xx 코드)

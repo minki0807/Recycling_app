@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -89,11 +90,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
 
         public void bind(ProductDTO product) {
+            if (product == null) return;
+
             // 상품명
-            textViewName.setText(product.getProductName());
+            textViewName.setText(product.getProductName() != null ? product.getProductName() : "");
 
             // 가격 포맷팅
-            String formattedPrice;
+            String formattedPrice = "";
             if ("나눔하기".equals(product.getTransactionType())) {
                 formattedPrice = "나눔";
                 textViewPrice.setTextColor(context.getResources().getColor(R.color.success, context.getTheme()));
@@ -105,7 +108,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             textViewPrice.setText(formattedPrice);
 
             // 거래 방식
-            textViewTransactionType.setText(product.getTransactionType());
+            textViewTransactionType.setText(product.getTransactionType() != null ? product.getTransactionType() : "");
 
             // 거래 방식에 따른 배경색 설정
             if ("나눔하기".equals(product.getTransactionType())) {
@@ -131,7 +134,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             if (product.getImages() != null && !product.getImages().isEmpty()) {
                 String imageUrl = product.getImages().get(0);
 
-                android.util.Log.d("ProductAdapter", "Loading image URL: " + imageUrl);
+                Log.d("ProductAdapter", "Loading image URL: " + imageUrl);
 
                 RequestOptions requestOptions = new RequestOptions()
                         .fitCenter()
@@ -144,7 +147,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         .apply(requestOptions)
                         .into(imageViewProduct);
             } else {
-                android.util.Log.d("ProductAdapter", "Image list is empty for product: " + product.getProductName());
+                Log.d("ProductAdapter", "Image list is empty for product: " + product.getProductName());
                 // 기본 이미지 설정
                 imageViewProduct.setImageResource(R.drawable.placeholder_image);
             }

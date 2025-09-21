@@ -205,7 +205,7 @@ public class PersonalInfoEditActivity extends AppCompatActivity {
         String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
 
         // getProfile API 호출 시 Authorization 헤더 전달
-        apiService.getProfile(currentUid).enqueue(new Callback<ProfileDTO>() {
+        apiService.getProfile(currentUid, authHeader).enqueue(new Callback<ProfileDTO>() {
             @Override
             public void onResponse(@NonNull Call<ProfileDTO> call, @NonNull Response<ProfileDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -309,7 +309,7 @@ public class PersonalInfoEditActivity extends AppCompatActivity {
         String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
 
         // updateProfileFields API 호출 시 Authorization 헤더 전달
-        apiService.updateProfileFields(currentUid, updates).enqueue(new Callback<String>() {
+        apiService.updateProfileFields(currentUid, authHeader, updates).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {

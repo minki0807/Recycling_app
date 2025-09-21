@@ -30,7 +30,7 @@ import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.recycling_app.R;
-import com.example.recycling_app.dto.market.ApiResponse;
+import com.example.recycling_app.service.ApiResponse;
 import com.example.recycling_app.dto.market.ProductDTO;
 import com.example.recycling_app.network.RetrofitClient;
 import com.example.recycling_app.service.ProductApiService;
@@ -168,7 +168,7 @@ public class Product_Registration extends AppCompatActivity {
         for (Uri uri : selectedImageUris) {
             View thumbnailView = LayoutInflater.from(this).inflate(R.layout.item_thumbnail, llThumbRow, false);
             ImageView ivThumbnail = thumbnailView.findViewById(R.id.iv_thumbnail);
-            ImageView ivRemove = thumbnailView.findViewById(R.id.iv_remove);
+            ImageView ivRemove = thumbnailView.findViewById(R.id.btn_delete_thumb);
 
             Glide.with(this).load(uri).into(ivThumbnail);
 

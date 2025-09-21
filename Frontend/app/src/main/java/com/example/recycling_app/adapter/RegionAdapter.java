@@ -1,5 +1,5 @@
 // 파일 경로: com/example/recycling_app/Howtobox/RegionAdapter.java
-package com.example.recycling_app.Howtobox;
+package com.example.recycling_app.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

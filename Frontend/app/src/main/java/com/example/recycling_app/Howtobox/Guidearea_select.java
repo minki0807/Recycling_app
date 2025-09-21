@@ -28,6 +28,8 @@ import com.example.recycling_app.Location.LocationActivity;
 import com.example.recycling_app.MainscreenActivity;
 import com.example.recycling_app.Profile.MypageActivity;
 import com.example.recycling_app.R;
+import com.example.recycling_app.adapter.RegionAdapter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -184,7 +184,7 @@ public class SettingsActivity extends AppCompatActivity {
         String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
 
         // getLanguageSetting API 호출 시 Authorization 헤더 전달
-        apiService.getLanguageSetting(currentUid).enqueue(new Callback<LanguageDTO>() {
+        apiService.getLanguageSetting(currentUid, authHeader).enqueue(new Callback<LanguageDTO>() {
             @Override
             public void onResponse(Call<LanguageDTO> call, Response<LanguageDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -289,7 +289,7 @@ public class SettingsActivity extends AppCompatActivity {
         String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
 
         // updateLanguageSetting API 호출 시 Authorization 헤더 전달
-        apiService.updateLanguageSetting(currentUid, languageDTO).enqueue(new Callback<String>() {
+        apiService.updateLanguageSetting(currentUid, authHeader ,languageDTO).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {

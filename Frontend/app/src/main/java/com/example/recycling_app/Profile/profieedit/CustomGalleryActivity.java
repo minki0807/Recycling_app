@@ -30,6 +30,8 @@ import java.util.List; // 리스트 컬렉션
 // 기기 내 이미지들을 불러와 그리드 형태로 보여주고, 선택된 이미지의 URI를 반환
 public class CustomGalleryActivity extends AppCompatActivity {
 
+    private static final String TAG = "CustomGalleryActivity";
+
     // 외부 저장소 읽기 권한 요청 코드
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 1;
     private RecyclerView recyclerView; // 이미지들을 표시할 RecyclerView

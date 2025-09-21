@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -59,15 +60,21 @@ public class MakePostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.community_makepost);
 
+        apiService = CommunityApiService.getInstance();
         Intent intent = getIntent();
         uid = intent.getStringExtra("USER_ID");
         authorName = intent.getStringExtra("USER_NICKNAME");
         postId = intent.getStringExtra("postId");
 
+
         if (uid == null || authorName == null) {
             Toast.makeText(this, "사용자 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
             finish();
             return;
+        }
+
+        if (postId != null) {
+            loadPostData(postId);
         }
 
         WindowInsetsControllerCompat windowInsetsController =
@@ -76,7 +83,6 @@ public class MakePostActivity extends AppCompatActivity {
             windowInsetsController.setAppearanceLightStatusBars(true);
         }
 
-        apiService = CommunityApiService.getInstance();
 
         titleEditText = findViewById(R.id.edit_text_title);
         recycleCheckBox = findViewById(R.id.checkbox_recycle);
@@ -202,21 +208,25 @@ public class MakePostActivity extends AppCompatActivity {
     }
 
     private void loadPostData(String postId) {
-        apiService.getPostById(postId, uid, new Callback<Post>() {
+        apiService.getPostById(postId, new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.e(TAG, "수정을 위한 게시글 로드 성공: " + response.code() + " " + response.message());
                     Post post = response.body();
                     titleEditText.setText(post.getTitle());
                     checkCategory(post.getCategory());
                     displayContents(post.getContents());
+
                 } else {
+                    Log.e(TAG, "게시글 로드 실패: " + response.code() + " " + response.message());
                     Toast.makeText(MakePostActivity.this, "게시글 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+                Log.e(TAG, "게시글 로드 통신 오류", t);
                 Toast.makeText(MakePostActivity.this, "네트워크 오류", Toast.LENGTH_SHORT).show();
             }
         });
@@ -230,6 +240,7 @@ public class MakePostActivity extends AppCompatActivity {
             if ("text".equals(block.getType())) {
                 currentText = block.getText();
                 addEditableText(currentText);
+
             } else if ("image".equals(block.getType())) {
                 ImageView imageView = new ImageView(this);
                 imageView.setLayoutParams(new LinearLayout.LayoutParams(
@@ -249,6 +260,7 @@ public class MakePostActivity extends AppCompatActivity {
         newEditText.setBackgroundResource(android.R.color.transparent);
         newEditText.setHint("내용을 입력해주세요.");
         newEditText.setText(text);
+        newEditText.setTextColor(getResources().getColor(android.R.color.black));
         contentContainer.addView(newEditText);
     }
     private void setupImagePickerLauncher() {

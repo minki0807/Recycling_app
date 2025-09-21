@@ -19,6 +19,8 @@ import java.util.List; // 리스트 컬렉션
 // 이미지 URI 리스트를 받아 RecyclerView의 각 항목(이미지 뷰)으로 변환하고 표시
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageViewHolder> {
 
+    private static final String TAG = "GalleryAdapter";
+
     private final Context context; // 어댑터가 실행되는 애플리케이션 컨텍스트
     private final List<Uri> imageUris; // 표시할 이미지들의 URI 리스트
     private final OnImageClickListener listener; // 이미지 클릭 이벤트를 처리할 리스너

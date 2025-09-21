@@ -576,7 +576,7 @@ public class Photo_Recognition extends AppCompatActivity {
             startActivity(intent);
         });
 
-        homeIcon.setOnClickListener(v -> {
+        messageIcon.setOnClickListener(v -> {
             Intent intent = new Intent(Photo_Recognition.this, CommunityActivity.class);
             startActivity(intent);
         });

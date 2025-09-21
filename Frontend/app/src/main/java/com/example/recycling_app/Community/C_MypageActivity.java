@@ -1,5 +1,6 @@
 package com.example.recycling_app.Community;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,13 +37,14 @@ public class C_MypageActivity extends AppCompatActivity {
     private static final String TAG = "C_MypageActivity";
     private TextView mypageProfileText;
     private ImageView mypageProfileImage;
-    private Button myPostButton, myCommentedPostButton, myLikedPostButton;
-    private RecyclerView recyclerView;
+    private MaterialButton myPostButton, myCommentedPostButton, myLikedPostButton;
+    private RecyclerView recyclerViewPosts;
     private PostAdapter postAdapter;
     private CommunityApiService apiService;
     private FirebaseAuth mAuth;
     private String currentUid;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,37 +54,26 @@ public class C_MypageActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         apiService = CommunityApiService.getInstance();
 
-        mAuth.addAuthStateListener(firebaseAuth -> {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // 사용자가 로그인되어 있을 때 프로필 로드
-                ProfileLoader.loadProfile(this, mypageProfileText, mypageProfileImage, user, null);
-                // 기본으로 내가 쓴 글 목록을 로드
-                fetchMyPosts();
-            } else {
-                // 사용자가 로그아웃 상태일 때 처리
-                Log.e(TAG, "사용자가 로그인되어 있지 않습니다.");
-                Toast.makeText(C_MypageActivity.this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
-                // 모든 데이터를 지우고 로그인 화면으로 이동
-                postAdapter.submitList(null);
-            }
-        });
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            currentUid = user.getUid();
+        } else {
+            Toast.makeText(this, "로그인 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
+        // UI 요소 초기화
         mypageProfileText = findViewById(R.id.mypage_nickname);
         mypageProfileImage = findViewById(R.id.text_profile_initial);
+
+        // MaterialButton 타입으로 올바르게 캐스팅
         myPostButton = findViewById(R.id.mypost);
         myCommentedPostButton = findViewById(R.id.mycommentpost);
         myLikedPostButton = findViewById(R.id.mylikepost);
-        recyclerView = findViewById(R.id.recycler_view_posts);
 
-        mAuth = FirebaseAuth.getInstance();
-        apiService = CommunityApiService.getInstance();
-
-        // 어댑터 초기화 및 설정
-        postAdapter = new PostAdapter(mAuth.getUid()); // PostAdapter에 현재 사용자의 UID 전달
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(postAdapter);
-
+        // RecyclerView 초기화
+        recyclerViewPosts = findViewById(R.id.recycler_view_posts);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (view, insets) -> {
             int topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
@@ -93,14 +84,16 @@ public class C_MypageActivity extends AppCompatActivity {
                 params.topMargin = topInset + (int) (getResources().getDisplayMetrics().density);
                 mypageProfileImage.setLayoutParams(params);
             }
-            if (recyclerView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) recyclerView.getLayoutParams();
+            if (recyclerViewPosts.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) recyclerViewPosts.getLayoutParams();
                 params.bottomMargin = bottomInset + (int) (getResources().getDisplayMetrics().density);
-                recyclerView.setLayoutParams(params);
+                recyclerViewPosts.setLayoutParams(params);
             }
             return WindowInsetsCompat.CONSUMED;
         });
 
+        // RecyclerView 설정
+        postAdapter = new PostAdapter(currentUid);
         postAdapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Post post) {
@@ -137,22 +130,25 @@ public class C_MypageActivity extends AppCompatActivity {
             }
         });
 
+        recyclerViewPosts.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewPosts.setAdapter(postAdapter);
+
         // 버튼 클릭 리스너 설정
         myPostButton.setOnClickListener(v -> {
             fetchMyPosts();
-            setCategoryButtonColor((MaterialButton) myPostButton);
+            setCategoryButtonColor(myPostButton);
         });
         myCommentedPostButton.setOnClickListener(v -> {
             fetchMyCommentedPosts();
-            setCategoryButtonColor((MaterialButton) myCommentedPostButton);
+            setCategoryButtonColor(myCommentedPostButton);
         });
         myLikedPostButton.setOnClickListener(v -> {
             fetchMyLikedPosts();
-            setCategoryButtonColor((MaterialButton) myLikedPostButton);
+            setCategoryButtonColor(myLikedPostButton);
         });
-        setCategoryButtonColor((MaterialButton) myPostButton);
+        setCategoryButtonColor(myPostButton);
 
-        ProfileLoader.loadProfile(this, mypageProfileText, mypageProfileImage, mAuth.getCurrentUser(), profile -> {
+        ProfileLoader.loadProfile(this, mypageProfileText, mypageProfileImage, user, profile -> {
             fetchMyPosts();
         });
     }
@@ -171,28 +167,28 @@ public class C_MypageActivity extends AppCompatActivity {
             Log.e(TAG, "사용자 로그인 정보가 없어 게시글을 불러올 수 없습니다.");
             return;
         }
-        Log.d(TAG, "내가 쓴 게시글 로드 시작");
-        // CommunityApiService에서 불필요한 UID 파라미터 제거
-        apiService.getMyPosts(new Callback<List<Post>>() {
+
+        Log.d(TAG, "내 게시글 로드 시작, UID: " + user.getUid());
+        apiService.getMyPosts(user.getUid(), new Callback<List<Post>>() {
             @Override
             public void onResponse(@NonNull Call<List<Post>> call, @NonNull Response<List<Post>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Post> myPosts = response.body();
-                    Log.d(TAG, "내가 쓴 게시글 로드 성공, 총 " + myPosts.size() + "개");
+                    Log.d(TAG, "내 게시글 로드 성공, 총 " + myPosts.size() + "개");
                     postAdapter.submitList(myPosts);
                 } else {
-                    Log.e(TAG, "내가 쓴 게시글 로드 실패: " + response.code() + " " + response.message());
-                    Toast.makeText(C_MypageActivity.this, "게시글을 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "내 게시글 로드 실패: " + response.code() + " " + response.message());
+                    Toast.makeText(C_MypageActivity.this, "내 게시글을 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<Post>> call, @NonNull Throwable t) {
-                Log.e(TAG, "내가 쓴 게시글 로드 통신 오류: ", t);
+                Log.e(TAG, "내 게시글 로드 네트워크 오류: ", t);
                 Toast.makeText(C_MypageActivity.this, "네트워크 오류", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
     private void fetchMyCommentedPosts() {
         FirebaseUser user = mAuth.getCurrentUser();
@@ -200,22 +196,24 @@ public class C_MypageActivity extends AppCompatActivity {
             Log.e(TAG, "사용자 로그인 정보가 없어 댓글 단 게시글을 불러올 수 없습니다.");
             return;
         }
-        Log.d(TAG, "내가 댓글 단 게시글 로드 시작");
-        apiService.getPostsCommentedByMe(new Callback<List<Post>>() {
+        String uid = user.getUid();
+        Log.d(TAG, "댓글 단 게시글 로드 시작, UID: " + uid);
+        apiService.getPostsCommentedByMe(uid, new Callback<List<Post>>() {
             @Override
             public void onResponse(@NonNull Call<List<Post>> call, @NonNull Response<List<Post>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Post> commentedPosts = response.body();
-                    Log.d(TAG, "내가 댓글 단 게시글 로드 성공, 총 " + commentedPosts.size() + "개");
+                    Log.d(TAG, "댓글 단 게시글 로드 성공, 총 " + commentedPosts.size() + "개");
                     postAdapter.submitList(commentedPosts);
                 } else {
-                    Log.e(TAG, "내가 댓글 단 게시글 로드 실패: " + response.code() + " " + response.message());
+                    Log.e(TAG, "댓글 단 게시글 로드 실패: " + response.code() + " " + response.message());
                     Toast.makeText(C_MypageActivity.this, "댓글 단 게시글을 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<Post>> call, @NonNull Throwable t) {
-                Log.e(TAG, "내가 댓글 단 게시글 로드 통신 오류: ", t);
+                Log.e(TAG, "댓글 단 게시글 로드 네트워크 오류: ", t);
                 Toast.makeText(C_MypageActivity.this, "네트워크 오류", Toast.LENGTH_SHORT).show();
             }
         });
@@ -227,8 +225,9 @@ public class C_MypageActivity extends AppCompatActivity {
             Log.e(TAG, "사용자 로그인 정보가 없어 좋아요한 게시글을 불러올 수 없습니다.");
             return;
         }
-        Log.d(TAG, "좋아요한 게시글 로드 시작");
-        apiService.getMyLikedPosts(new Callback<List<Post>>() {
+        String uid = user.getUid();
+        Log.d(TAG, "좋아요한 게시글 로드 시작, UID: " + uid);
+        apiService.getMyLikedPosts(uid, new Callback<List<Post>>() {
             @Override
             public void onResponse(@NonNull Call<List<Post>> call, @NonNull Response<List<Post>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -240,9 +239,10 @@ public class C_MypageActivity extends AppCompatActivity {
                     Toast.makeText(C_MypageActivity.this, "좋아요한 게시글을 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<Post>> call, @NonNull Throwable t) {
-                Log.e(TAG, "좋아요한 게시글 로드 통신 오류: ", t);
+                Log.e(TAG, "좋아요한 게시글 로드 네트워크 오류: ", t);
                 Toast.makeText(C_MypageActivity.this, "네트워크 오류", Toast.LENGTH_SHORT).show();
             }
         });

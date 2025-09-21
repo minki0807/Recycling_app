@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,7 +30,7 @@ import com.example.recycling_app.adapter.ProductAdapter;
 import com.example.recycling_app.dto.User;
 import com.example.recycling_app.network.RetrofitClient;
 import com.example.recycling_app.service.ProductApiService;
-import com.example.recycling_app.dto.market.ApiResponse;
+import com.example.recycling_app.service.ApiResponse;
 import com.example.recycling_app.dto.market.ProductDTO;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseAuth;
@@ -163,6 +162,7 @@ public class Upcycling_market_mainscreen extends AppCompatActivity
     }
 
     private void setupRecyclerView() {
+        // productsAdapter의 생성자에 'this' (Context)와 'this' (OnProductClickListener)를 전달합니다.
         productAdapter = new ProductAdapter(this, this);
         recyclerViewProducts.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewProducts.setAdapter(productAdapter);

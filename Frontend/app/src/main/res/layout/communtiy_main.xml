@@ -41,10 +41,13 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="352dp"
                     android:gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/circle_background"
+                    android:clipToOutline="true"
                     app:layout_constraintBottom_toBottomOf="@+id/textCommunity"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textCommunity"
-                    tools:src="@drawable/background_profile_initial" />
+                    tools:src="@drawable/basic_profile_logo" />
 
                 <ImageView
                     android:id="@+id/community_back"

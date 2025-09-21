@@ -197,7 +197,7 @@ public class MyInquiriesActivity extends AppCompatActivity {
         String authHeader = "Bearer " + firebaseIdToken; // Authorization 헤더 생성
 
         // getInquiriesByUid API 호출 시 Authorization 헤더 전달
-        apiService.getInquiriesByUid(currentUid).enqueue(new Callback<List<InquiryDTO>>() {
+        apiService.getInquiriesByUid(currentUid, authHeader).enqueue(new Callback<List<InquiryDTO>>() {
             @Override
             public void onResponse(@NonNull Call<List<InquiryDTO>> call, @NonNull Response<List<InquiryDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
