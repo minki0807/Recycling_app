@@ -29,7 +29,7 @@ public class FirebaseInitializer {
     public void init() {
         try {
             FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/firebase/firebase-service-account.json");
+                    new FileInputStream("${firebase.sdk.path}");
 
 //            // FileInputStream 대신 클래스패스 리소스를 InputStream으로 직접 읽어옵니다.(aws ec2 전용)
 //            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(firebaseSdkPath);
