@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.FindEmailFragment">
+
+    <!-- 초기 입력 화면 그룹 -->
+    <LinearLayout
+        android:id="@+id/initial_input_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_view_input_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="가입한 사용자 정보를 입력해주세요"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/layout_find_email_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edittext_background"
+            android:gravity="center_vertical"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_person_image"
+                android:contentDescription="이름 아이콘" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="10dp"
+                android:background="#B0B0B0" />
+
+            <EditText
+                android:id="@+id/edit_text_find_email_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="이름을 입력해주세요"
+                android:paddingStart="10dp"
+                android:paddingEnd="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#A0A0A0"
+                android:textSize="16sp"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_find_email_phone_number_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edittext_background"
+            android:gravity="center_vertical"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_phone"
+                android:contentDescription="전화번호 아이콘" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="10dp"
+                android:background="#B0B0B0" />
+
+            <EditText
+                android:id="@+id/edit_text_find_email_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="전화번호를 입력해주세요"
+                android:paddingStart="10dp"
+                android:paddingEnd="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#A0A0A0"
+                android:textSize="16sp"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_find_email_submit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#F0E68C"
+            android:text="아이디 찾기"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+
+    <!-- 결과 화면 그룹 (초기에는 GONE) -->
+    <LinearLayout
+        android:id="@+id/result_display_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/app_logo_result"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/recycling_app_icon2"
+            android:contentDescription="앱 로고" />
+
+        <TextView
+            android:id="@+id/text_view_found_email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="사용자님의 아이디를 찾았습니다"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_found_email_display"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edittext_background"
+            android:gravity="center_vertical"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_email"
+                android:contentDescription="이메일 아이콘" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="10dp"
+                android:background="#B0B0B0" />
+
+            <EditText
+                android:id="@+id/edit_text_found_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingStart="10dp"
+                android:paddingEnd="20dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:clickable="true"
+                tools:text="example@gmail.com" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_reset_password_from_find_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#F0E68C"
+            android:text="비밀번호 찾기"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:cornerRadius="10dp" />
+
+        <TextView
+            android:id="@+id/text_view_login_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="로그인하기"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="5dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

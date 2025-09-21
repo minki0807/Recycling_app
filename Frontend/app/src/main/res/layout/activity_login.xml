@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B5F8DB"
+    tools:context=".Account.LoginActivity">
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="216dp"
+        android:layout_height="213dp"
+        android:layout_marginTop="80dp"
+        android:contentDescription="앱 로고"
+        android:src="@drawable/recycling_app_icon2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 이메일/아이디 입력 필드 -->
+    <LinearLayout
+        android:id="@+id/layout_login_email_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_logo">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_email"
+            android:contentDescription="이메일 아이콘" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="이메일"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="textEmailAddress" />
+    </LinearLayout>
+
+    <!-- 비밀번호 입력 필드 -->
+    <LinearLayout
+        android:id="@+id/layout_login_password_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_login_email_input">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_lock"
+            android:contentDescription="비밀번호 아이콘" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="비밀번호"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <!-- 로그인 버튼 -->
+    <Button
+        android:id="@+id/button_login_submit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#F0E68C"
+        android:text="로그인"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_login_password_input" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0F7FA"
+    tools:context=".Howtobox.Guidearea_select">
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/area_search_background"
+        android:hint="지역을 검색하세요."
+        android:paddingStart="16dp"
+        android:paddingEnd="48dp"
+        android:textColor="#666666"
+        android:textColorHint="#AAAAAA"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/searchIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_area_search"
+        android:contentDescription="검색"
+        app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
+        app:layout_constraintEnd_toEndOf="@+id/searchEditText"
+        app:layout_constraintTop_toTopOf="@+id/searchEditText" />
+
+    <LinearLayout
+        android:id="@+id/regionSelectionContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/selectedRegionTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#F5F5F5"
+                android:gravity="center"
+                android:text="시 · 도"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sidoRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#E0E0E0" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#F5F5F5"
+                android:gravity="center"
+                android:text="시 · 군 · 구"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sigunguRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#E0E0E0" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#F5F5F5"
+                android:gravity="center"
+                android:text="읍 · 면 · 동"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dongRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/selectedRegionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:gravity="start"
+        android:padding="16dp"
+        android:text="지역을 선택해주세요"
+        android:textColor="#333333"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/area_button_cancel_background"
+            android:text="취소"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirmButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/area_button_confirm_background"
+            android:text="확인"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/underbar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:contentDescription="언더바"
+        android:scaleType="fitXY"
+        android:src="@drawable/underbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="4dp"/>
+
+    <ImageButton
+        android:id="@+id/home_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/home_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="홈"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:elevation="5dp" />
+
+    <ImageButton
+        android:id="@+id/map_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/map_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="지도"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:elevation="5dp" />
+
+    <ImageButton
+        android:id="@+id/camera_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="카메라"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:elevation="5dp" />
+
+    <ImageButton
+        android:id="@+id/message_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/message_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="커뮤니티"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.7"
+        android:elevation="5dp" />
+
+    <ImageButton
+        android:id="@+id/account_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/account_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="마이페이지"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.9"
+        android:elevation="5dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

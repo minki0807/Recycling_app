@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B5F8DB"
+    tools:context=".Account.SignupActivity">
+
+    <ImageView
+        android:id="@+id/signup_logo"
+        android:layout_width="216dp"  android:layout_height="213dp" android:layout_marginTop="20dp" android:contentDescription="앱 로고"
+        android:src="@drawable/recycling_app_icon2" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout_id_input"
+        android:layout_width="0dp" android:layout_height="50dp" android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp" android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background" android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_logo">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_email"
+            android:contentDescription="이메일 아이콘" />
+
+        <View
+            android:layout_width="2dp" android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" android:hint="이메일"
+            android:paddingStart="10dp" android:paddingEnd="20dp"
+            android:textColor="#A7A7A7"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_password_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_id_input"> <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/ic_lock"
+        android:contentDescription="비밀번호 아이콘" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="비밀번호"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:textColor="#A7A7A7"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_password_confirm_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_password_input">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_check"
+            android:contentDescription="비밀번호 확인 아이콘" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="비밀번호 확인"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:textColor="#A7A7A7"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_name_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_password_confirm_input">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_person_image"
+            android:contentDescription="닉네임 아이콘" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="이름"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:textColor="#A7A7A7"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_phone_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_edittext_background"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_name_input">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_phone"
+            android:contentDescription="전화번호 아이콘" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:background="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/edit_text_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="전화번호"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:textColor="#A7A7A7"
+            android:textColorHint="#A0A0A0"
+            android:textSize="16sp"
+            android:inputType="phone" />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkbox_location_consent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp" android:text="위치 정보 수집 동의"
+        android:textColor="#4C4B4B"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_phone_input" />
+
+    <CheckBox
+        android:id="@+id/checkbox_privacy_consent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="1dp"
+        android:text="개인정보 수집 동의"
+        android:textColor="#4C4B4B"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_location_consent" />
+
+    <Button
+        android:id="@+id/button_signup"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#F0E68C"
+        android:text="다음 페이지"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_privacy_consent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

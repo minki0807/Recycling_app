@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 스위치가 켜진(checked) 상태일 때 (공개) -->
+    <item android:state_checked="true" android:color="#0DDE82"/> <!-- 사진의 초록색 계열 -->
+    <!-- 스위치가 꺼진(unchecked) 상태일 때 (비공개) -->
+    <item android:color="#474646"/> <!-- 사진의 회색 계열 -->
+</selector>

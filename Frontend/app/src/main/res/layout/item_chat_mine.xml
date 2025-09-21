@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="end"
+    android:padding="8dp">
+
+    <!-- 말풍선 -->
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_chat_mine"
+        android:padding="10dp"
+        android:text="내가 보낸 메시지"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"/>
+
+    <!-- 메시지 보낸 시간 -->
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:30"
+        android:textSize="10sp"
+        android:textColor="#888888"
+        android:layout_marginEnd="6dp"/>
+
+</LinearLayout>

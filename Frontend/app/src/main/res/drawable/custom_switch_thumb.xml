@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <size android:width="28dp" android:height="28dp"/> <!-- 동그라미 크기 -->
+    <solid android:color="#FFFFFF"/> <!-- 기본 색상 (thumbTint가 최종 색상 결정) -->
+</shape>
+    

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0F7FA"
+    tools:context=".Howtobox.Wasteguide">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/underbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/howToRecycleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="지역별 가이드"
+                android:textColor="@color/black"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/recycle_box_image"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="0dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="분리수거 일러스트"
+                android:elevation="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/howto_box_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/howToRecycleText" />
+
+            <TextView
+                android:id="@+id/guidearea_search_box"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_background"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="주소 검색"
+                android:textColor="#555555"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycle_box_image" />
+
+            <View
+                android:id="@+id/white_background"
+                android:layout_width="0dp"
+                android:layout_height="650dp"
+                android:background="@drawable/white_rounded_top_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycle_box_image" />
+
+            <ImageView
+                android:id="@+id/character"
+                android:layout_width="157dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/character_noback"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guide_details_textview" />
+
+            <TextView
+                android:id="@+id/guide_details_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/waste_guide_answer_speech_bubble"
+                android:fontFamily="@font/nanumgothicextrabold"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guidearea_search_box" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/underbar"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:contentDescription="언더바"
+        android:elevation="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/underbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/home_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="홈"
+        android:elevation="5dp"
+        android:src="@drawable/home_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintTop_toTopOf="@+id/underbar" />
+
+    <ImageButton
+        android:id="@+id/map_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="지도"
+        android:elevation="5dp"
+        android:src="@drawable/map_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintTop_toTopOf="@+id/underbar" />
+
+    <ImageButton
+        android:id="@+id/camera_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="카메라"
+        android:elevation="5dp"
+        android:src="@drawable/camera_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintTop_toTopOf="@+id/underbar" />
+
+    <ImageButton
+        android:id="@+id/message_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="커뮤니티"
+        android:elevation="5dp"
+        android:src="@drawable/message_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintTop_toTopOf="@+id/underbar" />
+
+    <ImageButton
+        android:id="@+id/account_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="마이페이지"
+        android:elevation="5dp"
+        android:src="@drawable/account_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintTop_toTopOf="@+id/underbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

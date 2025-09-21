@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B5F8DB"
+        tools:context=".Account.Googleuser_AdditionalInfoActivity">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="50dp"
+                android:paddingBottom="40dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="추가 정보 입력"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            <LinearLayout
+                    android:id="@+id/layout_phone_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:gravity="center_vertical"
+                    android:elevation="4dp">
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_phone"
+                        android:contentDescription="전화번호 아이콘" />
+
+                <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="10dp"
+                        android:background="#B0B0B0" />
+
+                <EditText
+                        android:id="@+id/google_edit_text_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:hint="전화번호"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="20dp"
+                        android:textColorHint="#A0A0A0"
+                        android:inputType="phone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_nickname_input"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_edittext_background"
+                android:gravity="center_vertical"
+                android:elevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_password_confirm_input">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_person_image"
+                    android:contentDescription="닉네임 아이콘" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="10dp"
+                    android:background="#B0B0B0" />
+
+                <EditText
+                    android:id="@+id/edit_text_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:hint="닉네임"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#A0A0A0"
+                    android:textSize="16sp"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout_age_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:gravity="center_vertical"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_age"
+                        android:contentDescription="나이 아이콘" />
+
+                <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="10dp"
+                        android:background="#B0B0B0" />
+
+                <TextView
+                        android:id="@+id/text_view_age_selection"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textColorHint="#A0A0A0"
+                        android:text="나이를 선택하세요"
+                        android:hint="나이를 선택하세요" />
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        android:contentDescription="드롭다운 아이콘" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout_gender_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:gravity="center_vertical"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_gender"
+                        android:contentDescription="성별 아이콘" />
+
+                <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="10dp"
+                        android:background="#B0B0B0" />
+
+                <TextView
+                        android:id="@+id/text_view_gender_selection"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:text="성별을 선택하세요"
+                        android:hint="성별을 선택하세요"
+                        android:textColorHint="#A0A0A0"/>
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        android:contentDescription="드롭다운 아이콘" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout_region_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:gravity="center_vertical"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_location"
+                        android:contentDescription="지역 아이콘" />
+
+                <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="10dp"
+                        android:background="#B0B0B0" />
+
+                <TextView
+                        android:id="@+id/text_view_region_selection"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:text="지역을 선택하세요"
+                        android:hint="지역을 선택하세요"
+                        android:textColorHint="#A0A0A0"/>
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        android:contentDescription="드롭다운 아이콘" />
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/button_signup_complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="50dp"
+                    android:backgroundTint="#F0E68C"
+                    android:text="회원가입 완료"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    app:cornerRadius="10dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F8FF"
+    tools:context=".Profile.customerservice.MyInquiriesActivity">
+
+    <View
+        android:id="@+id/top_background_view"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="#B5F8DB"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_arrow_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:tint="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/my_inquiries_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 문의"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/inter_18pt_bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rounded_white_background_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_top_white_background"
+        app:layout_constraintTop_toBottomOf="@id/top_background_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="-170dp">
+
+        <TextView
+            android:id="@+id/tv_no_inquiries"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="작성된 문의가 없습니다."
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:fontFamily="@font/inter_18pt_bold"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:background="@drawable/rounded_menu_item_background"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_inquiries_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_inquiry_record" />
+
+        <Button
+                android:id="@+id/btn_submit_new_inquiry_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새로운 문의하기"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#4CAF50"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="72dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 언더 바 아이콘 -->
+
+    <ImageView
+        android:id="@+id/underbar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:contentDescription="언더바"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/underbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/home_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_icon"
+        android:contentDescription="홈"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.1"
+        />
+
+    <ImageButton
+        android:id="@+id/map_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/map_icon"
+        android:contentDescription="지도"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.3"
+        />
+
+    <ImageButton
+        android:id="@+id/camera_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/camera_icon"
+        android:contentDescription="카메라"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <ImageButton
+        android:id="@+id/message_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/message_icon"
+        android:contentDescription="커뮤니티"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.7"
+        />
+
+    <ImageButton
+        android:id="@+id/account_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/account_icon_green"
+        android:contentDescription="마이페이지"
+        app:layout_constraintTop_toTopOf="@+id/underbar"
+        app:layout_constraintBottom_toBottomOf="@+id/underbar"
+        app:layout_constraintStart_toStartOf="@+id/underbar"
+        app:layout_constraintEnd_toEndOf="@+id/underbar"
+        app:layout_constraintHorizontal_bias="0.9"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="프로필 아이콘 밑에 초록색 원"
+        app:layout_constraintStart_toStartOf="@+id/account_icon"
+        app:layout_constraintTop_toTopOf="@+id/account_icon"
+        app:srcCompat="@drawable/green_dot"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- AI 인식 이미지 -->
+        <ImageView
+            android:id="@+id/iv_item_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/basic_profile_logo"
+            android:background="@drawable/rounded_image_background"
+            android:clipToOutline="true"
+            android:layout_marginEnd="16dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 인식 항목 이름 -->
+            <TextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인식 항목"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:fontFamily="@font/inter_18pt_bold"
+                android:layout_marginBottom="4dp" />
+
+            <!-- 인식 날짜 -->
+            <TextView
+                android:id="@+id/tv_recognition_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024.07.26 14:30"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/inter_18pt_bold"
+                android:layout_marginBottom="4dp" />
+
+            <!-- 인식 결과 -->
+            <TextView
+                android:id="@+id/tv_recognition_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="재활용 가능"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#4CAF50"
+                android:fontFamily="@font/inter_18pt_bold" />
+
+        </LinearLayout>
+
+        <!-- 화살표 아이콘 (오른쪽 정렬) -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/outline_arrow_drop_down_24"
+            app:tint="#888888"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

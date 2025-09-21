@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B5F8DB"
+        tools:context=".StartscreenActivity">
+
+    <ImageView
+            android:id="@+id/main_logo"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/recycling_app_icon2"
+            android:contentDescription="메인 화면 로고"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+            android:id="@+id/layout_login_button_group"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edittext_background"
+            android:gravity="center_vertical"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_logo">
+
+        <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_globe"
+                android:contentDescription="로그인 아이콘" />
+
+        <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="10dp"
+                android:background="#B0B0B0" />
+
+        <Button
+                android:id="@+id/login_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="Login"
+                android:textColor="#83827A"
+                android:textSize="15sp"
+                android:textAlignment="viewStart"
+                android:paddingStart="10dp"
+                android:paddingEnd="20dp"
+                android:stateListAnimator="@null" />
+    </LinearLayout>
+
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_google_sign_in"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_login_button_group" />
+
+    <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_google_sign_in"
+            app:layout_constraintHorizontal_bias="0.0">
+
+        <TextView
+                android:id="@+id/signup_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="15dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="8dp"
+                android:text="회원가입"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+        <TextView
+                android:id="@+id/find_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="아이디 및 비밀번호 찾기"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:background="@drawable/rounded_background"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BEF2D2"
+    tools:context=".Community.CommunityActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#BEF2D2">
+                <TextView
+                    android:id="@+id/textCommunity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="커뮤니티"
+                    android:textColor="@color/black"
+                    android:textSize="40sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/text_profile_initial"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="352dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/textCommunity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textCommunity"
+                    tools:src="@drawable/background_profile_initial" />
+
+                <ImageView
+                    android:id="@+id/community_back"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/community_back" />
+                <ImageView
+                    android:id="@+id/community_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/community_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textCommunity"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/community_img" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:clipToPadding="false"
+            android:paddingBottom="88dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="0dp"
+                        android:paddingBottom="4dp">
+                        <Button
+                            android:id="@+id/textAll"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="전체"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                        <Button
+                            android:id="@+id/textrecycle"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="분리수거"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                        <Button
+                            android:id="@+id/textMarket"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="업사이클링 마켓"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                        <Button
+                            android:id="@+id/textEvent"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="캠페인/이벤트"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                        <Button
+                            android:id="@+id/textQnA"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Q&amp;A"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EAEAEA" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_posts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/community_item_post" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <ImageView
+            android:id="@+id/underbar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:contentDescription="언더바"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/underbar" />
+
+        <ImageButton
+            android:id="@+id/home_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_icon"
+            android:contentDescription="홈"
+            app:layout_constraintTop_toTopOf="@+id/underbar"
+            app:layout_constraintBottom_toBottomOf="@+id/underbar"
+            app:layout_constraintStart_toStartOf="@+id/underbar"
+            app:layout_constraintEnd_toEndOf="@+id/underbar"
+            app:layout_constraintHorizontal_bias="0.1"
+            />
+
+        <ImageButton
+            android:id="@+id/map_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/map_icon"
+            android:contentDescription="지도"
+            app:layout_constraintTop_toTopOf="@+id/underbar"
+            app:layout_constraintBottom_toBottomOf="@+id/underbar"
+            app:layout_constraintStart_toStartOf="@+id/underbar"
+            app:layout_constraintEnd_toEndOf="@+id/underbar"
+            app:layout_constraintHorizontal_bias="0.3"
+            />
+
+        <ImageButton
+            android:id="@+id/camera_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/camera_icon"
+            android:contentDescription="카메라"
+            app:layout_constraintTop_toTopOf="@+id/underbar"
+            app:layout_constraintBottom_toBottomOf="@+id/underbar"
+            app:layout_constraintStart_toStartOf="@+id/underbar"
+            app:layout_constraintEnd_toEndOf="@+id/underbar"
+            app:layout_constraintHorizontal_bias="0.5"
+            />
+
+        <ImageButton
+            android:id="@+id/message_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/massage_icon_green"
+            android:contentDescription="커뮤니티"
+            app:layout_constraintTop_toTopOf="@+id/underbar"
+            app:layout_constraintBottom_toBottomOf="@+id/underbar"
+            app:layout_constraintStart_toStartOf="@+id/underbar"
+            app:layout_constraintEnd_toEndOf="@+id/underbar"
+            app:layout_constraintHorizontal_bias="0.7"
+            />
+
+        <ImageButton
+            android:id="@+id/account_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/account_icon"
+            android:contentDescription="마이페이지"
+            app:layout_constraintTop_toTopOf="@+id/underbar"
+            app:layout_constraintBottom_toBottomOf="@+id/underbar"
+            app:layout_constraintStart_toStartOf="@+id/underbar"
+            app:layout_constraintEnd_toEndOf="@+id/underbar"
+            app:layout_constraintHorizontal_bias="0.9"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="38dp"
+            android:contentDescription="커뮤니티 아이콘 밑에 초록색 원"
+            app:layout_constraintStart_toStartOf="@+id/message_icon"
+            app:layout_constraintTop_toTopOf="@+id/message_icon"
+            app:srcCompat="@drawable/green_dot"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="150dp"
+        android:contentDescription="글쓰기"
+        app:srcCompat="@drawable/baseline_edit_24"
+        app:backgroundTint="@color/white"
+        app:tint="@color/black" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

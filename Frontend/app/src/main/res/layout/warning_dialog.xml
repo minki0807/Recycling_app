@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/warningmsg"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="경고 메세지"
+        android:src="@drawable/warningmsg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/info_close"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="확인"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_border"
+        app:layout_constraintBottom_toBottomOf="@id/warningmsg"
+        app:layout_constraintEnd_toEndOf="@id/warningmsg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

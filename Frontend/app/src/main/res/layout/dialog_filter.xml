@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <CheckBox
+            android:id="@+id/recycle_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="분리수거함" />
+
+        <CheckBox
+            android:id="@+id/clothes_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="의류수거함" />
+
+        <CheckBox
+            android:id="@+id/phone_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="폐휴대폰" />
+
+        <CheckBox
+            android:id="@+id/homemachine_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="폐소형가전" />
+
+        <CheckBox
+            android:id="@+id/pill_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="폐의약품" />
+
+        <CheckBox
+            android:id="@+id/battery_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="폐건전지/폐형광등" />
+
+    </LinearLayout>
+</ScrollView>

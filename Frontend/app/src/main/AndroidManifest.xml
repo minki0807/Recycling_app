@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+  
+  <!--Permission-->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/> <!--  이미지 파일 접근 권한 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/> <!--  비디오 파일 접근 권한 -->
+    <uses-permission android:name="android.permission.CAMERA"/> <!-- 카메라 사용 권한-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 인터넷 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 위치 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 위치 -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" /> <!-- 카메라 하드웨어가 없어도 앱 동작 가능 -->
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false" /> <!-- 세로 모드 기능-->
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" /> <!-- 카메라 플래쉬 없어도 앱 동작 가능 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" /> <!-- 자동초점 없어도 앱 동작 가능 -->
+
+    <queries>
+        <package android:name="com.google.android.gms" />
+    </queries>
+
+    <application
+        android:name=".network.GlobalApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_appicon"
+        android:label="@string/app_name"
+        android:usesCleartextTraffic="true"  tools:targetApi="31"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Recycling_App"
+        android:networkSecurityConfig="@xml/network_security_config" >
+
+        <meta-data
+
+            android:name="com.kakao.vectormap.AppKey"
+            android:value="f74b1223cc505a613aeb568c3277ff52" />
+
+        <!--앱 실행시 시작 화면-->
+        <activity
+            android:name=".StartscreenActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Recycling_app">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+      
+        <activity
+            android:name=".Profile.customerservice.CustomerSupportActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.mysetting.SettingsActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.detailsofuse.UsageHistoryActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.accountmanagement.AccountManagementActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.profieedit.ProfileEditActivity" android:exported="false" />
+        <activity
+            android:name=".Camera_recognition.CameraActivity" android:exported="false" />
+        <activity
+            android:name=".Camera_recognition.Photo_Recognition" android:exported="false" />
+        <activity
+            android:name=".Location.LocationActivity" android:exported="false" />
+        <activity
+            android:name=".Account.SignupActivity" android:exported="false" />
+        <activity
+            android:name=".Account.AdditionalInfoActivity" android:exported="false" />
+        <activity
+            android:name=".Account.LoginActivity" android:exported="false" />
+        <activity
+            android:name=".Account.FindInfoActivity" android:exported="false" />
+        <activity
+            android:name=".Account.Googleuser_AdditionalInfoActivity" android:exported="false" />
+        <activity
+            android:name=".MainscreenActivity" android:exported="false" />
+        <activity
+            android:name=".Howtobox.Wasteguide" android:exported="false" />
+        <activity
+            android:name=".Howtobox.Guidearea_select" android:exported="false" />
+        <activity
+            android:name=".Profile.MypageActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.customerservice.MyInquiriesActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.customerservice.SubmitInquiryActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.customerservice.FaqActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.customerservice.InquiryActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.accountmanagement.AccountDeletionActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.detailsofuse.AiRecognitionHistoryActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.accountmanagement.PasswordEditActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.accountmanagement.PersonalInfoEditActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.profieedit.CustomGalleryActivity" android:exported="false" />
+        <activity
+            android:name=".Profile.profieedit.ProfileActivity" android:exported="false" />
+        <activity 
+            android:name=".Community.MakePostActivity" android:exported="false" />
+        <activity 
+            android:name=".Community.CommunityActivity" android:exported="false" />
+        <activity
+            android:name=".Community.DetailActivity" android:exported="false" />
+        <activity 
+            android:name=".Community.C_MypageActivity" android:exported="false" />
+        <activity 
+            android:name=".Community.OtherUserPageActivity" android:exported="false" />
+        <activity
+            android:name=".Upcycling_market.Upcycling_market_mainscreen" android:exported="false" />
+        <activity
+            android:name=".Upcycling_market.Product_Registration" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Upcycling_market.Product_Detail" android:exported="false" />
+        <activity
+            android:name=".Upcycling_market.Seller_Profile" android:exported="false" />
+        <activity
+            android:name=".Upcycling_market.ChatActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.practice11"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/cammeraaccess" />
+        </provider>
+    </application>
+
+</manifest>

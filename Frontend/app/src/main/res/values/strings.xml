@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">쓰담 AI</string>
+    <string name="default_web_client_id">838424729978-ifig8jp5v4k75up5q0hgccv273ptcld3.apps.googleusercontent.com</string>
+    <string name="success_login">구글 로그인 성공</string>
+    <string name="failed_login">구글 로그인 실패</string>
+    <string name="success_logout">로그아웃 되었습니다</string>
+    <string name="status_login">이미 로그인 되어있습니다</string>
+    <string name="add_photo">사진 추가</string>
+    <string name="untitled">제목 없음</string>
+</resources>

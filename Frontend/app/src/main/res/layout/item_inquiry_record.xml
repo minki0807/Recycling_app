@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_inquiry_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의 제목입니다"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_18pt_bold"
+            android:layout_marginBottom="4dp"
+            tools:text="문의 제목입니다" />
+
+        <TextView
+            android:id="@+id/tv_inquiry_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="문의 내용이 여기에 표시됩니다. 길어지면 두 줄까지만 보입니다." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tv_inquiry_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2024.07.26"
+                android:textColor="#555555"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_18pt_bold"
+                tools:text="2024.07.26" />
+
+            <TextView
+                android:id="@+id/tv_inquiry_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="답변 대기"
+                android:textColor="#FF9800"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/inter_18pt_bold"
+                tools:text="답변 대기" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/answer_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:background="#f0f0f0"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="답변:"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tv_inquiry_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                tools:text="여기에 문의에 대한 답변이 표시됩니다." />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
