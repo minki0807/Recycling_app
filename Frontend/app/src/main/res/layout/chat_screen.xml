@@ -21,7 +21,7 @@
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
             android:contentDescription="뒤로가기"
@@ -34,7 +34,7 @@
             android:layout_centerInParent="true"
             android:text="판매자 닉네임"
             android:textColor="#222222"
-            android:textSize="24sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
