@@ -17,10 +17,10 @@ public class GeminiService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    @Value("${gemini.model:gemini-1.5-pro}")
+    @Value("${gemini.model:gemini-1.5-flash}")
     private String geminiModel;
 
-    private static final String GEMINI_API_BASE_URL = "https://generativelanguage.googleapis.com/v1/models";
+    private static final String GEMINI_API_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
 
     // CHANGED: RestTemplate을 직접 생성하지 않고 주입받음
     private final RestTemplate restTemplate;
